@@ -14,8 +14,6 @@ import java.util.List;
 //@Controller
 public class JobController {
 
-//    JobPost jobPost;
-
     @Autowired
     JobService jobService;
 
