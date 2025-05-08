@@ -23,6 +23,5 @@ public class RestJobController {
     @GetMapping("jobPosts")
     public List<JobPost> getAllJobs(){
         return jobService.getAlljobs();
-
     }
 }
