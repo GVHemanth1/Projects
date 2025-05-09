@@ -4,7 +4,6 @@ package com.example.RestJobApp.controller;
 import com.example.RestJobApp.model.JobPost;
 import com.example.RestJobApp.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +28,7 @@ public class RestJobController {
         return jobService.getjob(postid);
 
     }
+
 
     @PostMapping("jobpost")
     public JobPost addJob(@RequestBody JobPost jobPost){

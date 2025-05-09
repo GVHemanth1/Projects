@@ -61,6 +61,7 @@ public class JobRepo {
 
     }
 
+    // Get a particular job post based on postid
 
     public JobPost getJob(int postid) {
         for (JobPost job : jobs )
@@ -70,6 +71,8 @@ public class JobRepo {
         }
         return null;
     }
+
+    // Method to update a job post field
 
     public void updateJob(JobPost jobPost) {
         for (JobPost jobPost1 : jobs){
@@ -82,7 +85,7 @@ public class JobRepo {
 
         }
     }
-
+    // Delete a job post 
     public void deleteJob(int postId) {
 
         try
