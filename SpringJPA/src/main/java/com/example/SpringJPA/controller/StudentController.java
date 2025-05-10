@@ -28,9 +28,6 @@ public class StudentController {
 
     @GetMapping("student/{id}")
     public Optional<Student> getStudent(@PathVariable int id){
-
-//        studentService.getStudent(id);
-
         return studentService.getStudent(id);
     }
 }
