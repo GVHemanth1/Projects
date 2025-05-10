@@ -141,7 +141,7 @@ We welcome contributions! Follow these steps:
 ## **🌟 Connect with Me**
 
 <div align="left">
-<a href="https://linkedin.com/in/your-profile"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="LinkedIn logo" /></a>
+<a href="https://www.linkedin.com/in/venkata-hemanth-guddanti-249bb812a/"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="LinkedIn logo" /></a>
 </div>
 
 ---
