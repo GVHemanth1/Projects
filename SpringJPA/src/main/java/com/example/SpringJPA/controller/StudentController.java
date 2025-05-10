@@ -1,0 +1,36 @@
+package com.example.SpringJPA.controller;
+
+import com.example.SpringJPA.model.Student;
+import com.example.SpringJPA.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+public class StudentController {
+
+    @Autowired
+    StudentService studentService;
+
+    @GetMapping("student")
+    public List<Student> getStudents(){
+
+        return studentService.getStudents();
+    }
+
+    @PostMapping("add")
+    public void addStudent(@RequestBody Student student){
+        studentService.addStudent(student);
+
+    }
+
+    @GetMapping("student/{id}")
+    public Optional<Student> getStudent(@PathVariable int id){
+
+//        studentService.getStudent(id);
+
+        return studentService.getStudent(id);
+    }
+}
