@@ -136,6 +136,7 @@ We welcome contributions! Follow these steps:
 
 ---
 
+
 ## **📜 License**
 
 🔹 **MIT License** - Free for commercial & personal use.
