@@ -39,10 +39,17 @@ public class StudentController {
 
         return studentService.findByName(name);
     }
-//   Condition based search 
+//   Condition based search
     @GetMapping("search/Bymarks/{marks}")
     public List<Student> findByMarks(@PathVariable int marks){
 
         return studentService.findByMarks(marks);
+    }
+
+    @PutMapping("update")
+    public void updateStudent(@RequestBody Student student){
+        studentService.updateStudent(student);
+
+        
     }
 }

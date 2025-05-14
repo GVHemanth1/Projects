@@ -40,4 +40,9 @@ public class StudentService {
 
         return studentRepo.findByMarksGreaterThan(marks);
     }
+
+    public Student updateStudent(Student student) {
+
+        return studentRepo.save(student);
+    }
 }
