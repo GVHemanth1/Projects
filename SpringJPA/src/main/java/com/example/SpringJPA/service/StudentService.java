@@ -29,4 +29,15 @@ public class StudentService {
 
         return studentRepo.findById(id);
     }
+
+
+    public List<Student> findByName(String name) {
+
+        return studentRepo.findByName(name);
+    }
+
+    public List<Student> findByMarks(int marks) {
+
+        return studentRepo.findByMarksGreaterThan(marks);
+    }
 }

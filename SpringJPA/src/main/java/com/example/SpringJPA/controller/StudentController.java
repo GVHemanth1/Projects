@@ -33,5 +33,16 @@ public class StudentController {
     public Optional<Student> getStudent(@PathVariable int id){
         return studentService.getStudent(id);
     }
+//   Search details by name
+    @GetMapping("search/{name}")
+    public List<Student> findByName(@PathVariable String name){
 
+        return studentService.findByName(name);
+    }
+//   Condition based search 
+    @GetMapping("search/Bymarks/{marks}")
+    public List<Student> findByMarks(@PathVariable int marks){
+
+        return studentService.findByMarks(marks);
+    }
 }
