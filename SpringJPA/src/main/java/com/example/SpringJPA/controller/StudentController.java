@@ -46,10 +46,24 @@ public class StudentController {
         return studentService.findByMarks(marks);
     }
 
-    @PutMapping("update")
+    @PutMapping("student")
     public void updateStudent(@RequestBody Student student){
         studentService.updateStudent(student);
 
-        
+    }
+
+    @DeleteMapping("student/{id}")
+    public String deleteStudent(@PathVariable int id){
+        try {
+            studentService.deleteStudent(id);
+            return "Student "+id +" deleted";
+
+        } catch (Exception e) {
+            return  "Student not found";
+
+        }
+
+
+
     }
 }

@@ -76,14 +76,23 @@ cd Projects/SpringJPA
 ```
 
 2️⃣ **Open the Project in an IDE** (IntelliJ IDEA, Eclipse, VS Code).
-3️⃣ **Configure Database** - Add the following in [`application.properties`](https://application.properties):
+3️⃣ **Configure Database** - Add the following in `application.properties`:
 
+🗄️***H2 Database :***
 ```properties
 spring.datasource.url=jdbc:h2:mem:testdb
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
 spring.datasource.password=password
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+```
+
+🗄️***Postgres Database :***
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/testdb
+spring.datasource.username=username
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
 4️⃣ **Build & Run**
@@ -133,7 +142,7 @@ We welcome contributions! Follow these steps:
 
 ## **📜 License**
 
-🔹 **MIT License** - Free for commercial & personal use.
+🔹 **License** - Free for commercial & personal use.
 📌 See the [LICENSE](./LICENSE) file for details.
 
 ---
