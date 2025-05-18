@@ -1,77 +1,123 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import {
-    AppBar,
-    Toolbar,
-    Box,
-    Card,
-    Grid,
-    Typography,
-  } from "@mui/material";
-  import axios from "axios";
-  import { useEffect, useState } from "react";
+  AppBar,
+  Toolbar,
+  Box,
+  Card,
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  Switch,
+  Chip,
+  Skeleton,
+} from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Search as SearchIcon, WorkOutline, Brightness4 } from "@mui/icons-material";
 
 const Search = () => {
-    const [post, setPost] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [keyword, setKeyword] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchInitialPosts = async () => {
-            const response = await axios.get(`http://localhost:8081/jobPosts`);
-            console.log(response);
-            setPost(response.data);
-        }
-         fetchInitialPosts();
-      }, []);
+  useEffect(() => {
+    fetchInitialPosts();
+  }, []);
+
+  const fetchInitialPosts = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:8081/jobposts");
+      setPosts(response.data);
+    } catch (error) {
+      console.error("Error fetching job posts:", error);
+    }
+    setLoading(false);
+  };
+
+  const handleSearch = async (searchKeyword) => {
+    if (!searchKeyword.trim()) {
+      fetchInitialPosts();
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `http://localhost:8081/jobpost/search/${searchKeyword}`
+      );
+      setPosts(response.data);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setPosts([]);
+    }
+    setLoading(false);
+  };
 
   return (
-        <Grid container spacing={2} sx={{ margin: "2%" }}>
-                  <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
- 
-          <Typography variant="h6" align='center' component="div" sx={{ flexGrow: 1 }}>
-            Job Portal
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </Box>
-      <Grid item xs={12} sx={12} md={12} lg={12}>
+    <Grid container spacing={2} className="page-container">
+      {/* Navbar with Theme Toggle */}
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" className="navbar">
+          <Toolbar>
+            <WorkOutline sx={{ marginRight: 2 }} />
+            <Typography variant="h6" className="title">
+              Tech Jobs Hub 🚀
+            </Typography>
+            <Button className="add-job-btn" onClick={() => navigate("/add-job")}>
+              Add Job
+            </Button>
+            <Brightness4 sx={{ marginLeft: 2 }} />
+            <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+          </Toolbar>
+        </AppBar>
+      </Box>
+
+      {/* Search Bar */}
+      <Grid item xs={12} className="search-container">
+        <TextField
+          variant="outlined"
+          label="Search Jobs..."
+          InputProps={{
+            startAdornment: <SearchIcon className="search-icon" />,
+          }}
+          value={keyword}
+          onChange={(e) => {
+            setKeyword(e.target.value);
+            handleSearch(e.target.value);
+          }}
+          className="search-input"
+        />
       </Grid>
-      {post &&
-        post.map((p) => {
-          return (
-            <Grid key={p.id} item xs={12} md={6} lg={4}>
-              <Card sx={{ padding: "3%", overflow: "hidden", width: "84%" }}>
-                <Typography
-                  variant="h5"
-                  sx={{ fontSize: "2rem", fontWeight: "600" }}
-                >
-             {p.postProfile}
-                </Typography>
-                <Typography sx={{ color: "#585858", marginTop:"2%" }} variant="body" >
-                  Description: {p.postDesc}
-                </Typography>
-                <br />
-                <br />
-                <Typography variant="h6">
-                  Years of Experience: {p.reqExperience} years
-                </Typography>
 
-                <Typography gutterBottom  variant="body">Skills : </Typography>
-                {p.postTechStack.map((s, i) => {
-                  return (
-                    <Typography variant="body" gutterBottom key={i}>
-                      {s} .
-                      {` `}
-                    </Typography>
-                  );
-                })}
-  
-              </Card>
-            </Grid>
-          );
-        })}
+      {/* Job Listings */}
+      {loading ? (
+        <Skeleton variant="rectangular" width="100%" height={200} />
+      ) : posts.length > 0 ? (
+        posts.map((p) => (
+          <Grid key={p.postId} item xs={12} md={6} lg={4}>
+            <Card className={`job-card ${darkMode ? "dark-mode" : ""}`}>
+              <Typography variant="h5" className="job-title">
+                {p.postProfile}
+              </Typography>
+              <Typography className="job-id">Post ID: {p.postId}</Typography>
+              <Typography className="job-desc">{p.postDesc}</Typography>
+              <Typography variant="h6">Experience: {p.reqExperience} years</Typography>
+              <Typography gutterBottom>Skills:</Typography>
+              {p.postTechStack.map((s, i) => (
+                <Chip label={s} className="skill-chip" key={i} />
+              ))}
+            </Card>
+          </Grid>
+        ))
+      ) : (
+        <Typography className="no-results">No matching job posts found.</Typography>
+      )}
     </Grid>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

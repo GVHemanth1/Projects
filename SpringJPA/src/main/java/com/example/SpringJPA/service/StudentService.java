@@ -46,13 +46,15 @@ public class StudentService {
         return studentRepo.save(student);
     }
 
+    // Delete the existing student
     public void deleteStudent(int id) {
         Optional<Student> student = studentRepo.findById(id);
         if (student.isPresent()) {
-            studentRepo.delete(student.get()); // Delete the existing student
+            studentRepo.delete(student.get());
         }
         else {
-            throw new RuntimeException("Student with ID " + id + " not found"); // Handle non-existing student case
+            // Handle non-existing student case
+            throw new RuntimeException("Student with ID " + id + " not found");
         }
     }
 
