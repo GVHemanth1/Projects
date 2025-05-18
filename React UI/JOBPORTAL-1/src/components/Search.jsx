@@ -1,3 +1,5 @@
+// Search.jsx
+
 import React, { useEffect, useState } from "react";
 import {
   AppBar,
@@ -15,6 +17,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +27,8 @@ import {
   WorkOutline,
   Brightness4,
   AddCircleOutline,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
+  Edit,
+  Delete,
 } from "@mui/icons-material";
 
 const Search = () => {
@@ -33,9 +37,6 @@ const Search = () => {
   const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
-  const [jobToDelete, setJobToDelete] = useState(null);
   const [jobPost, setJobPost] = useState({
     postId: "",
     postProfile: "",
@@ -45,10 +46,6 @@ const Search = () => {
   });
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchInitialPosts();
-  }, []);
 
   const fetchInitialPosts = async () => {
     setLoading(true);
@@ -61,6 +58,10 @@ const Search = () => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    fetchInitialPosts();
+  }, []);
+
   const handleSearch = async (searchKeyword) => {
     if (!searchKeyword.trim()) {
       fetchInitialPosts();
@@ -69,9 +70,7 @@ const Search = () => {
 
     setLoading(true);
     try {
-      const response = await axios.get(
-        `http://localhost:8081/jobpost/search/${searchKeyword}`
-      );
+      const response = await axios.get(`http://localhost:8081/jobpost/search/${searchKeyword}`);
       setPosts(response.data);
     } catch (error) {
       console.error("Error fetching search results:", error);
@@ -80,19 +79,28 @@ const Search = () => {
     setLoading(false);
   };
 
-  const handleOpenDialog = () => setOpenDialog(true);
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    setEditMode(false);
-    setJobPost({
-      postId: "",
-      postProfile: "",
-      postDesc: "",
-      reqExperience: "",
-      postTechStack: "",
-    });
+  const handleOpenDialog = (post = null) => {
+    if (post) {
+      setJobPost({
+        postId: post.postId,
+        postProfile: post.postProfile,
+        postDesc: post.postDesc,
+        reqExperience: post.reqExperience,
+        postTechStack: post.postTechStack.join(","),
+      });
+    } else {
+      setJobPost({
+        postId: "",
+        postProfile: "",
+        postDesc: "",
+        reqExperience: "",
+        postTechStack: "",
+      });
+    }
+    setOpenDialog(true);
   };
+
+  const handleCloseDialog = () => setOpenDialog(false);
 
   const handleChange = (e) => {
     setJobPost({
@@ -103,84 +111,79 @@ const Search = () => {
 
   const handleSubmitJob = async () => {
     try {
-      const payload = {
+      await axios.post("http://localhost:8081/jobpost", {
         ...jobPost,
         postTechStack: jobPost.postTechStack.split(","),
-      };
-
-      if (editMode) {
-        await axios.put("http://localhost:8081/jobpost", payload);
-        alert("Job updated successfully!");
-      } else {
-        await axios.post("http://localhost:8081/jobpost", payload);
-        alert("Job added successfully!");
-      }
-
+      });
+      alert("Job submitted successfully!");
       handleCloseDialog();
       fetchInitialPosts();
     } catch (error) {
-      console.error("Error saving job:", error);
+      console.error("Error adding/updating job:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this job post?")) {
+      try {
+        await axios.delete(`http://localhost:8081/jobpost/${id}`);
+        alert("Job deleted successfully!");
+        fetchInitialPosts();
+      } catch (error) {
+        console.error("Error deleting job:", error);
+      }
     }
   };
 
   return (
-    <Grid container spacing={2} className="page-container">
+    <Grid container spacing={2} sx={{ padding: 3, fontFamily: "'Poppins', sans-serif" }}>
       {/* Navbar */}
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" className="navbar">
+      <Box sx={{ flexGrow: 1, marginBottom: 3 }}>
+        <AppBar position="static" sx={{ backgroundColor: "#1976d2", borderRadius: 2 }}>
           <Toolbar>
             <WorkOutline sx={{ marginRight: 2 }} />
-            <Typography variant="h6" className="title">
+            <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 600 }}>
               Tech Jobs Hub 🚀
             </Typography>
             <Button
               sx={{
-                fontSize: "1.2rem",
-                fontWeight: "bold",
-                fontFamily: "'Poppins', sans-serif",
+                fontSize: "1rem",
+                fontWeight: 600,
                 borderRadius: "30px",
-                padding: "12px 20px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                background: "rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(10px)",
-                boxShadow: "0px 0px 12px rgba(0, 123, 255, 0.2)",
-                transition: "0.3s",
+                px: 3,
+                py: 1,
+                background: "#fff",
+                color: "#1976d2",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                 "&:hover": {
-                  boxShadow: "0px 0px 18px rgba(0, 123, 255, 0.8)",
-                  transform: "scale(1.05)",
+                  background: "#e3f2fd",
                 },
-                color: "#fff",
               }}
-              onClick={handleOpenDialog}
+              onClick={() => handleOpenDialog()}
+              startIcon={<AddCircleOutline />}
             >
-              <AddCircleOutline sx={{ color: "#fff", fontSize: "2rem" }} />
               Add Job
             </Button>
             <Brightness4 sx={{ marginLeft: 2 }} />
-            <Switch
-              checked={darkMode}
-              onChange={() => setDarkMode(!darkMode)}
-            />
+            <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
           </Toolbar>
         </AppBar>
       </Box>
 
       {/* Search Bar */}
-      <Grid item xs={12} className="search-container">
+      <Grid item xs={12}>
         <TextField
           variant="outlined"
-          label="Search Jobs..."
+          fullWidth
+          label="Search by job profile, skills, experience..."
           InputProps={{
-            startAdornment: <SearchIcon className="search-icon" />,
+            startAdornment: <SearchIcon sx={{ marginRight: 1 }} />,
           }}
           value={keyword}
           onChange={(e) => {
             setKeyword(e.target.value);
             handleSearch(e.target.value);
           }}
-          className="search-input"
         />
       </Grid>
 
@@ -190,139 +193,76 @@ const Search = () => {
       ) : posts.length > 0 ? (
         posts.map((p) => (
           <Grid key={p.postId} item xs={12} md={6} lg={4}>
-            <Card className={`job-card ${darkMode ? "dark-mode" : ""}`}>
-              <Typography variant="h5" className="job-title">
-                {p.postProfile}
-              </Typography>
-              <Typography className="job-id">Post ID: {p.postId}</Typography>
-              <Typography className="job-desc">{p.postDesc}</Typography>
-              <Typography variant="h6">
-                Experience: {p.reqExperience} years
-              </Typography>
-              <Typography gutterBottom>Skills:</Typography>
-              {p.postTechStack.map((s, i) => (
-                <Chip label={s} className="skill-chip" key={i} />
-              ))}
-              <Box display="flex" justifyContent="flex-end" gap={1} mt={2}>
-                <EditIcon
-                  sx={{ cursor: "pointer", color: "blue" }}
-                  onClick={() => {
-                    setJobPost({
-                      ...p,
-                      postTechStack: p.postTechStack.join(","),
-                    });
-                    setEditMode(true);
-                    setOpenDialog(true);
-                  }}
-                />
-                <DeleteIcon
-                  sx={{ cursor: "pointer", color: "red" }}
-                  onClick={() => {
-                    setJobToDelete(p.postId);
-                    setConfirmDeleteDialog(true);
-                  }}
-                />
+            <Card
+              sx={{
+                padding: 2,
+                borderRadius: 2,
+                boxShadow: "0 3px 10px rgba(0,0,0,0.1)",
+                backgroundColor: darkMode ? "#1e1e1e" : "#fff",
+                color: darkMode ? "#fff" : "#000",
+                position: "relative",
+              }}
+            >
+              <Box>
+                <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+                  🚀 {p.postProfile}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "gray" }}>
+                  <b>Post ID:</b> {p.postId}
+                </Typography>
+                <Typography variant="body2" sx={{ my: 1 }}>
+                  {p.postDesc}
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 1 }}>
+                  <b>Experience:</b> {p.reqExperience} years
+                </Typography>
+                <Typography variant="body2" sx={{ fontWeight: 500, mb: 0.5 }}>
+                  Skills:
+                </Typography>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                  {p.postTechStack.map((s, i) => (
+                    <Chip label={s} key={i} color="primary" variant="outlined" />
+                  ))}
+                </Box>
+              </Box>
+
+              {/* Action Icons */}
+              <Box sx={{ position: "absolute", top: 10, right: 10 }}>
+                <Tooltip title="Edit">
+                  <IconButton onClick={() => handleOpenDialog(p)}>
+                    <Edit color="primary" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton onClick={() => handleDelete(p.postId)}>
+                    <Delete color="error" />
+                  </IconButton>
+                </Tooltip>
               </Box>
             </Card>
           </Grid>
         ))
       ) : (
-        <Typography className="no-results">
+        <Typography sx={{ margin: "auto", mt: 4, fontSize: 18 }}>
           No matching job posts found.
         </Typography>
       )}
 
       {/* Add/Edit Job Dialog */}
-      <Dialog open={openDialog} onClose={handleCloseDialog} className="job-popup">
-        <DialogTitle>{editMode ? "Edit Job" : "Add New Job"}</DialogTitle>
+      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ fontWeight: 600 }}>
+          {jobPost.postId ? "Edit Job Post" : "Add New Job"}
+        </DialogTitle>
         <DialogContent>
-          <TextField
-            label="Post ID"
-            name="postId"
-            type="number"
-            fullWidth
-            margin="normal"
-            onChange={handleChange}
-            value={jobPost.postId}
-            disabled={editMode}
-          />
-          <TextField
-            label="Job Profile"
-            name="postProfile"
-            fullWidth
-            margin="normal"
-            onChange={handleChange}
-            value={jobPost.postProfile}
-          />
-          <TextField
-            label="Description"
-            name="postDesc"
-            fullWidth
-            margin="normal"
-            onChange={handleChange}
-            value={jobPost.postDesc}
-          />
-          <TextField
-            label="Required Experience"
-            name="reqExperience"
-            type="number"
-            fullWidth
-            margin="normal"
-            onChange={handleChange}
-            value={jobPost.reqExperience}
-          />
-          <TextField
-            label="Tech Stack (comma-separated)"
-            name="postTechStack"
-            fullWidth
-            margin="normal"
-            onChange={handleChange}
-            value={jobPost.postTechStack}
-          />
+          <TextField label="Post ID" name="postId" type="number" fullWidth margin="normal" onChange={handleChange} value={jobPost.postId} />
+          <TextField label="Job Profile" name="postProfile" fullWidth margin="normal" onChange={handleChange} value={jobPost.postProfile} />
+          <TextField label="Description" name="postDesc" fullWidth margin="normal" onChange={handleChange} value={jobPost.postDesc} />
+          <TextField label="Required Experience" name="reqExperience" type="number" fullWidth margin="normal" onChange={handleChange} value={jobPost.reqExperience} />
+          <TextField label="Tech Stack (comma-separated)" name="postTechStack" fullWidth margin="normal" onChange={handleChange} value={jobPost.postTechStack} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmitJob} color="primary">
-            {editMode ? "Update Job" : "Add Job"}
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Confirm Delete Dialog */}
-      <Dialog
-        open={confirmDeleteDialog}
-        onClose={() => setConfirmDeleteDialog(false)}
-      >
-        <DialogTitle>Confirm Delete</DialogTitle>
-        <DialogContent>
-          <Typography>Are you sure you want to delete this job post?</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setConfirmDeleteDialog(false)}
-            color="secondary"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={async () => {
-              try {
-                await axios.delete(
-                  `http://localhost:8081/jobpost/${jobToDelete}`
-                );
-                alert("Job deleted successfully!");
-                setConfirmDeleteDialog(false);
-                fetchInitialPosts();
-              } catch (error) {
-                console.error("Error deleting job:", error);
-              }
-            }}
-            color="error"
-          >
-            Delete
-          </Button>
+          <Button onClick={handleCloseDialog} color="secondary">Cancel</Button>
+          <Button onClick={handleSubmitJob} color="primary">{jobPost.postId ? "Update" : "Add"} Job</Button>
         </DialogActions>
       </Dialog>
     </Grid>
