@@ -21,12 +21,12 @@
 
 /* Add Job Button */
 .add-job-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
+  background: rgba(20, 0, 0, 0.2);
+  border-radius: 30px;
   transition: 0.3s;
 }
 .add-job-btn:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(17, 0, 0, 0.5);
 }
 
 /* Search Bar */

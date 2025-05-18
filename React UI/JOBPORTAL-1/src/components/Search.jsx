@@ -11,16 +11,29 @@ import {
   Switch,
   Chip,
   Skeleton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Search as SearchIcon, WorkOutline, Brightness4 } from "@mui/icons-material";
+import { Search as SearchIcon, WorkOutline, Brightness4, AddCircleOutline } from "@mui/icons-material";
 
 const Search = () => {
   const [posts, setPosts] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [jobPost, setJobPost] = useState({
+    postId: "",
+    postProfile: "",
+    postDesc: "",
+    reqExperience: "",
+    postTechStack: "",
+  });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,9 +70,34 @@ const Search = () => {
     setLoading(false);
   };
 
+  const handleOpenDialog = () => setOpenDialog(true);
+  const handleCloseDialog = () => setOpenDialog(false);
+
+  const handleChange = (e) => {
+    setJobPost({
+      ...jobPost,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmitJob = async () => {
+    try {
+      await axios.post("http://localhost:8081/jobpost", {
+        ...jobPost,
+        postTechStack: jobPost.postTechStack.split(","),
+      });
+
+      alert("Job added successfully!");
+      handleCloseDialog();
+      fetchInitialPosts();
+    } catch (error) {
+      console.error("Error adding job:", error);
+    }
+  };
+
   return (
     <Grid container spacing={2} className="page-container">
-      {/* Navbar with Theme Toggle */}
+      {/* Navbar */}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" className="navbar">
           <Toolbar>
@@ -67,9 +105,35 @@ const Search = () => {
             <Typography variant="h6" className="title">
               Tech Jobs Hub 🚀
             </Typography>
-            <Button className="add-job-btn" onClick={() => navigate("/add-job")}>
-              Add Job
-            </Button>
+            <Button 
+  sx={{
+    fontSize: "1.2rem",
+    fontWeight: "bold",
+    fontFamily: "'Poppins', sans-serif",
+    borderRadius: "30px",
+    padding: "12px 20px",
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    background: "rgba(255, 255, 255, 0.1)",
+    backdropFilter: "blur(10px)",
+    boxShadow: "0px 0px 12px rgba(0, 123, 255, 0.2)",
+    transition: "0.3s",
+    "&:hover": {
+      boxShadow: "0px 0px 18px rgba(0, 123, 255, 0.8)",
+      transform: "scale(1.05)",
+    },
+    color: "#fff", // Yellow text color
+  }}
+  onClick={handleOpenDialog}
+>
+  <AddCircleOutline sx={{ color: "#fff", fontSize: "2rem" }} />
+  Add Job
+</Button>
+
+
+
+
             <Brightness4 sx={{ marginLeft: 2 }} />
             <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
           </Toolbar>
@@ -116,6 +180,22 @@ const Search = () => {
       ) : (
         <Typography className="no-results">No matching job posts found.</Typography>
       )}
+
+      {/* Add Job Popup */}
+      <Dialog open={openDialog} onClose={handleCloseDialog} className="job-popup">
+        <DialogTitle>Add New Job</DialogTitle>
+        <DialogContent>
+          <TextField label="Post ID" name="postId" type="number" fullWidth margin="normal" onChange={handleChange} />
+          <TextField label="Job Profile" name="postProfile" fullWidth margin="normal" onChange={handleChange} />
+          <TextField label="Description" name="postDesc" fullWidth margin="normal" onChange={handleChange} />
+          <TextField label="Required Experience" name="reqExperience" type="number" fullWidth margin="normal" onChange={handleChange} />
+          <TextField label="Tech Stack (comma-separated)" name="postTechStack" fullWidth margin="normal" onChange={handleChange} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="secondary">Cancel</Button>
+          <Button onClick={handleSubmitJob} color="primary">Add Job</Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   );
 };
