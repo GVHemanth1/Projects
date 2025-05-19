@@ -67,7 +67,7 @@ npm start
 
 🔹 Update the frontend API URL in JOBPORTAL-1/src/config.js:
 ```
-export const API_URL = "http://localhost:8082";
+export const API_URL = "http://localhost:8081";
 ```
 🔹 Run both backend (Spring Boot) and frontend (React) simultaneously.
 
