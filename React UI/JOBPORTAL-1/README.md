@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+# 🚀 JOB PORTAL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React](https://img.shields.io/badge/React-v18+-61DAFB.svg?logo=react)
+![Tailwind](https://img.shields.io/badge/TailwindCSS-v3-38BDF8?logo=tailwindcss)
+![Netlify](https://img.shields.io/badge/Hosted%20on-Netlify-00C7B7?logo=netlify)
+![JSON Server](https://img.shields.io/badge/Mock%20API-JSON%20Server-green?logo=json)
 
-## Available Scripts
+A modern, responsive Job Portal UI built with **React.js**, **Vite**, **Tailwind CSS**, and a **mock backend using JSON Server**. The app is designed for performance and ease of customization, ideal for developers building job listing platforms or learning full-stack concepts.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📚 Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [🌟 Features](#-features)
+- [🖥️ Demo](#️-demo)
+- [📦 Tech Stack](#-tech-stack)
+- [📁 Folder Structure](#-folder-structure)
+- [🚀 Getting Started](#-getting-started)
+- [⚙️ Scripts](#️-scripts)
+- [🌐 Deployment](#-deployment)
+- [📌 TODOs](#-todos)
+- [🤝 Contribution](#-contribution)
+- [📄 License](#-license)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🌟 Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+✅ Fast and optimized with **Vite**  
+✅ Clean, responsive UI using **Tailwind CSS**  
+✅ Modular **React components**  
+✅ JSON Server mock backend for local data  
+✅ API abstraction for easy integration  
+✅ Netlify Functions support for serverless operations  
+✅ Easily deployable to Netlify or Vercel  
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🖥️ Demo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> 🚧 Live demo coming soon!  
+> Alternatively, clone the repo and follow instructions below to run locally.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📦 Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Category       | Technology       |
+|----------------|------------------|
+| Frontend       | React 18, Vite    |
+| Styling        | Tailwind CSS     |
+| Backend (Mock) | JSON Server      |
+| Deployment     | Netlify + Netlify Functions |
+| Language       | JavaScript (ES6+) |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📁 Folder Structure
+JOBPORTAL-1/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── App.jsx
+├── netlify/
+│   └── functions/
+│       └── jobs.cjs
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+└── netlify.toml
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🚀 Getting Started
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔧 Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Node.js (v18 or higher)
+- npm
+- Netlify CLI (optional, for serverless functions)
 
-### Code Splitting
+## ⚙️ Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+# Clone the repository
+git clone https://github.com/GVHemanth1/Projects.git
+cd Projects/React UI/JOBPORTAL-1
 
-### Analyzing the Bundle Size
+# Install frontend dependencies
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Start JSON Server (mock API)
+npm run server
 
-### Making a Progressive Web App
+# Start React app
+npm run dev
+Access the app at: http://localhost:5173
+JSON Server runs at: http://localhost:8000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## ⚙️ Scripts
 
-### Advanced Configuration
+| Command           | Description                      |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Start development server         |
+| `npm run build`   | Create production-ready build    |
+| `npm run preview` | Preview production build locally |
+| `npm run server`  | Run JSON Server for mock API     |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## 🌐 Deployment (Netlify)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Step 1: Install Netlify CLI (if not installed)
+```
+npm install -g netlify-cli
+```
 
-### `npm run build` fails to minify
+## Step 2: Start Netlify dev server
+```
+netlify dev
+```
+This will serve the frontend along with Netlify serverless functions (```jobs.cjs```).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Step 3: Deploy
+```
+netlify deploy --prod
+```
+## 📌 TODOs
+
+- [x] Create base layout with navigation
+- [x] Job listing and filtering UI
+- [x] Integrate JSON Server for job data
+- [ ] Add job detail and apply pages
+- [ ] Admin panel for managing jobs
+- [ ] Authentication (Firebase/Auth0)
+- [ ] Integrate with real backend (Node.js/Express)
+
+
+## 🤝 Contribution
+Contributions are welcome!
+
+```
+# Fork the repo
+# Create a new branch: git checkout -b feature-name
+# Commit your changes
+# Push to your branch
+# Open a pull request
+```
+Please ensure your code adheres to project conventions and is well-documented.
+
+## 📄 License
+This project is licensed under the MIT License — see the LICENSE file for details.
+
+## 💬 Feedback
+If you find bugs or have suggestions, feel free to open an issue or reach out on LinkedIn.
+
+## **🌟 Connect with Me**
+
+<div align="left">
+<a href="https://www.linkedin.com/in/venkata-hemanth-guddanti-249bb812a/"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="LinkedIn logo" /></a>
+</div>
