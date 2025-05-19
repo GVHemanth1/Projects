@@ -52,9 +52,6 @@ npm start
 
 ## 📡 API Endpoints
 
-
-## 📡 API Endpoints
-
 | Method | Endpoint       | Description           |
 |--------|--------------|-----------------------|
 | `GET`  | `/jobs`       | Fetch all job listings |
