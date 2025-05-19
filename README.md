@@ -64,6 +64,14 @@ cd Projects/JobApp
 ## 💡 Contributing
 We welcome contributions! Follow these steps: 1️⃣ Fork the repository. 2️⃣ Create a new branch (feature/your-feature-name). 3️⃣ Commit changes & push the branch. 4️⃣ Open a Pull Request.
 
+
+## **🌟 Connect with Me**
+
+<div align="left">
+<a href="https://www.linkedin.com/in/venkata-hemanth-guddanti-249bb812a/"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="LinkedIn logo" /></a>
+</div>
+
+---
 ## 📜 License
 🔹 Free for commercial & personal use. 📌 See the LICENSE file for details.
 
