@@ -1,10 +1,7 @@
 package com.example.RestJobApp.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -26,5 +23,10 @@ public class LoggingAspect {
     @After("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..)) || execution(* com.example.RestJobApp.service.JobService.getjob(..))")
     public void logMethodExecuted(JoinPoint joinPoint){
         LOGGER.info("Method Executed : " + joinPoint.getSignature().getName());
+    }
+
+    @AfterThrowing("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..)) || execution(* com.example.RestJobApp.service.JobService.getjob(..))")
+    public void logMethodError(JoinPoint joinPoint){
+        LOGGER.info("Method Error : {}", joinPoint.getSignature().getName());
     }
 }
