@@ -32,3 +32,9 @@
 2025-05-26T20:07:34.039+05:30  INFO 20224 --- [RestJobApp] [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-05-26T20:07:34.041+05:30  INFO 20224 --- [RestJobApp] [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 2025-05-26T20:07:34.114+05:30  INFO 20224 --- [RestJobApp] [http-nio-8081-exec-2] c.example.RestJobApp.aop.LoggingAspect   : Method called : getjob
+2025-05-26T22:08:48.532+05:30  WARN 20224 --- [RestJobApp] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h53m26s672ms695µs800ns).
+2025-05-26T22:11:25.539+05:30  INFO 20224 --- [RestJobApp] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-26T22:11:25.559+05:30  INFO 20224 --- [RestJobApp] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-26T22:11:25.559+05:30  INFO 20224 --- [RestJobApp] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-26T22:11:25.559+05:30  INFO 20224 --- [RestJobApp] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-26T22:11:25.577+05:30  INFO 20224 --- [RestJobApp] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

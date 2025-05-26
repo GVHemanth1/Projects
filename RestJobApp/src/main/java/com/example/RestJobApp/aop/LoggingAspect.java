@@ -22,7 +22,7 @@ public class LoggingAspect {
         LOGGER.info("Method called : " + joinPoint.getSignature().getName());
     }
 
-// Multiple point cut can be used by ||
+// Multiple point cut can be used by || and execution/point cut
     @After("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..)) || execution(* com.example.RestJobApp.service.JobService.getjob(..))")
     public void logMethodExecuted(JoinPoint joinPoint){
         LOGGER.info("Method Executed : " + joinPoint.getSignature().getName());

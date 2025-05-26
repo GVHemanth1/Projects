@@ -10,11 +10,14 @@ A **Full-Stack Job Application Platform**, combining:
 - 🔍 **Search & filter** jobs dynamically.
 - 🌍 **Modern UI with React** for a smooth user experience.
 - 🚀 **RESTful API integration** with React frontend.
+- 📝 **Spring AOP concepts implemented**
+
 
 ## ⚙️ Technologies Used
 **Backend**:  
 🔹 Spring Boot 3.4.5  
 🔹 Spring JPA & Hibernate  
+🔹 Spring AOP  
 🔹 PostgreSQL
 
 **Frontend**:  
