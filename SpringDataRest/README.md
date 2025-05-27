@@ -93,27 +93,22 @@ GET /entities/search/findByName?name=example
 ### 🎨 Customization
 You can customize the exposed REST endpoints using annotations like:
 
-java
+```
 @RepositoryRestResource(path = "custom-path")
 public interface MyRepository extends JpaRepository<MyEntity, Long> {
 }
+```
 Additionally, you can modify response formats, disable certain endpoints, or integrate security 🔐
 
-🤝 Contributing
+## 🤝 Contributing
 Contributions are welcome! Follow these steps:
 
 1️⃣ Fork the repository 2️⃣ Create a new branch (feature/new-feature) 3️⃣ Commit your changes 4️⃣ Submit a Pull Request
 
-📜 License
+### 📜 License
 This project is licensed under the MIT License. See the LICENSE file for details 📄
 
-📧 Contact
+### 📧 Contact
 For questions or suggestions, reach out:
 
 🔹 GitHub: GVHemanth1 📬 Email: [Your Email Here]
-
-This README should help users understand and work with your Spring Data REST project efficiently. Let me know if you need any modifications! 🚀🔥
-
-
-This markdown file is designed to be engaging, informative, and visually appealing with the use of emojis and formatting! Hope it helps your project stand out! 🎉💡  
-Let me know if you'd like any tweaks! 😃  
