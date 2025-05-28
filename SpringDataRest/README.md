@@ -41,7 +41,7 @@ Spring Data REST simplifies the process of exposing JPA repositories as RESTful 
 
 🖥️ **Spring Boot**  
 🔌 **Spring Data JPA**  
-📡 **Spring Data REST**  
+📡 **Spring REST Repository**  
 🗄️ **H2 / MySQL / PostgreSQL (Database)**  
 🛠️ **Maven / Gradle**  
 🖥️ **Java 17+**
