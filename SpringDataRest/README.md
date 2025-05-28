@@ -67,7 +67,7 @@ Clone the repository:
 git clone https://github.com/GVHemanth1/Projects.git
 cd Projects/SpringDataRest
 ```
-### ▶️ Running the Application
+## ▶️ Running the Application
 Use Maven to build and run the project:
 
 ```
@@ -76,7 +76,7 @@ mvn spring-boot:run
 
 The application will start on http://localhost:8080 🌍
 
-### 🔗 API Endpoints
+## 🔗 API Endpoints
 Spring Data REST automatically exposes repository endpoints. Here are some examples:
 
 🔍 Method	🛣️ Endpoint	📌 Description
@@ -90,7 +90,7 @@ For custom queries, Spring Data REST provides /search endpoints:
 ```
 GET /entities/search/findByName?name=example
 ```
-### 🎨 Customization
+## 🎨 Customization
 You can customize the exposed REST endpoints using annotations like:
 
 ```
@@ -105,10 +105,39 @@ Contributions are welcome! Follow these steps:
 
 1️⃣ Fork the repository 2️⃣ Create a new branch (feature/new-feature) 3️⃣ Commit your changes 4️⃣ Submit a Pull Request
 
-### 📜 License
+## 📜 License
 This project is licensed under the MIT License. See the LICENSE file for details 📄
 
-### 📧 Contact
+## 📧 Contact
 For questions or suggestions, reach out:
 
-🔹 GitHub: GVHemanth1 📬 Email: [Your Email Here]
+🔹 🌐 GitHub: https://github.com/GVHemanth1
+🔹 📬 Email: venkatahemanth135@gmail.com
+
+<div align="left">
+<a href="https://www.linkedin.com/in/venkata-hemanth-guddanti-249bb812a/"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="20" height="80" alt="LinkedIn logo" /></a>
+</div>
+
+[//]: # ()
+[//]: # (<div align="left">)
+
+[//]: # (<a href="venkatahemanth135@gmail.com"><img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/5a116e6f9b3676ff71b4c0fd2993d81dca05ba00/src/assets/icons/social/gmail/default.svg" width="20" height="80" alt="LinkedIn logo" /></a>)
+
+[//]: # (</div>)
+
+[//]: # ()
+[//]: # (<div style="display: flex; gap: 100;">)
+
+[//]: # (    <a href="https://www.linkedin.com/in/venkata-hemanth-guddanti-249bb812a/">)
+
+[//]: # (        <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="20" height="50" alt="LinkedIn logo" />)
+
+[//]: # (    </a>)
+
+[//]: # (    <a href="mailto:venkatahemanth135@gmail.com">)
+
+[//]: # (        <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/5a116e6f9b3676ff71b4c0fd2993d81dca05ba00/src/assets/icons/social/gmail/default.svg" width="20" height="80" alt="Gmail logo" />)
+
+[//]: # (    </a>)
+
+[//]: # (</div>)
