@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 @Data
 @Entity
 @Component
+//Jobpost
 public class JobPost {
     @Id
     private int postId;
