@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
-// @After is Advice and ("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..))")
+// @After is an Advice and ("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..))")
 //    is Pointcut
     @Before("execution(* com.example.RestJobApp.service.JobService.*(..))")
     public void logMethodCall(JoinPoint joinPoint){
@@ -29,4 +29,8 @@ public class LoggingAspect {
     public void logMethodError(JoinPoint joinPoint){
         LOGGER.info("Method Error : {}", joinPoint.getSignature().getName());
     }
+
+
+
+
 }

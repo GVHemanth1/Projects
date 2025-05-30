@@ -39,7 +39,7 @@ public class RestJobController {
     }
 
     @PutMapping("jobpost")
-    public JobPost upateJob(@RequestBody JobPost jobPost){
+    public JobPost updateJob(@RequestBody JobPost jobPost){
         jobService.updateJob(jobPost);
 
         return jobService.getjob(jobPost.getPostId());
