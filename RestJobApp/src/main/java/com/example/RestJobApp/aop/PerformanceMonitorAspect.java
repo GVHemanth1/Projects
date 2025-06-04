@@ -23,7 +23,7 @@ public class PerformanceMonitorAspect {
 
         long end = System.currentTimeMillis();
 
-        LOGGER.info("Time taken by : " + proceedingJoinPoint.getSignature().getName() + " : " + (end - start) + " ms.");
+        LOGGER.info("Time taken for execution : " + proceedingJoinPoint.getSignature().getName() + " : " + (end - start) + " ms.");
 
         return object;
     }

@@ -30,7 +30,6 @@ public class RestJobController {
 
     }
 
-
     @PostMapping("jobpost")
     public JobPost addJob(@RequestBody JobPost jobPost){
 

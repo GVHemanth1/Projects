@@ -22,7 +22,7 @@ public class LoggingAspect {
 // Multiple point cut can be used by || and execution/point cut
     @After("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..)) || execution(* com.example.RestJobApp.service.JobService.getjob(..))")
     public void logMethodExecuted(JoinPoint joinPoint){
-        LOGGER.info("Method Executed : " + joinPoint.getSignature().getName());
+        LOGGER.info("Method Executed is : " + joinPoint.getSignature().getName());
     }
 
     @AfterThrowing("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..)) || execution(* com.example.RestJobApp.service.JobService.getjob(..))")
