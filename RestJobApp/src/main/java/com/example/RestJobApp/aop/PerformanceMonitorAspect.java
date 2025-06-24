@@ -7,8 +7,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.logging.Logger;
-
 @Component
 @Aspect
 public class PerformanceMonitorAspect {
@@ -17,6 +15,7 @@ public class PerformanceMonitorAspect {
 
     @Around("execution(* com.example.RestJobApp.service.JobService.*(..))")
     public Object monitorTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
         long start = System.currentTimeMillis();
 
         Object object = proceedingJoinPoint.proceed();

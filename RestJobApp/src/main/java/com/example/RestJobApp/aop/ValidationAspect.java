@@ -17,8 +17,8 @@ public class ValidationAspect {
     This ValidationAspect modifies negative postId values to positive values and then finds/executes
     the service
 
-
      */
+
     private static Logger logger = LoggerFactory.getLogger(ValidationAspect.class);
 
     @Around("execution(* com.example.RestJobApp.service.JobService.getjob(..)) && args(postId)")
@@ -31,6 +31,7 @@ public class ValidationAspect {
             logger.info("postId is " +postId);
 
         }
+
         Object object = proceedingJoinPoint.proceed(new Object[]{postId});
 
         return object;
