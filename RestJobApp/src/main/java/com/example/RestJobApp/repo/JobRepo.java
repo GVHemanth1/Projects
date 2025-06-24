@@ -25,8 +25,10 @@ public interface JobRepo extends JpaRepository<JobPost,Integer> {
 //// arrayList to store store JobPost objects
 //List<JobPost> jobs = new ArrayList<>();
 //
+
 //// ****************************************************************************
 //
+
 //// constructor->injecting objects into ArrayList defined above.
 //public JobRepo() {
 //
@@ -60,6 +62,7 @@ public interface JobRepo extends JpaRepository<JobPost,Integer> {
 //}
 //
 //// ****************************************************************************
+
 //
 //// method to return all JobPosts
 //public List<JobPost> getAllJobs() {
