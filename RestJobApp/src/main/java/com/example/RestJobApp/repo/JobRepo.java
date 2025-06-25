@@ -64,9 +64,11 @@ public interface JobRepo extends JpaRepository<JobPost,Integer> {
 //// ****************************************************************************
 
 //
+
 //// method to return all JobPosts
 //public List<JobPost> getAllJobs() {
 //    return jobs;
+
 //}
 //
 //// method to save a job post object into arrayList
