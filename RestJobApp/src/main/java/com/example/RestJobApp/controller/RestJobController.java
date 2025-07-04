@@ -53,7 +53,6 @@ public class RestJobController {
     @GetMapping("loaddata")
     public String loadData(){
         jobService.load();
-
         return "Data loaded successfully";
     }
 
@@ -62,4 +61,6 @@ public class RestJobController {
         return jobService.search(keyword);
 
     }
+    
+
 }
