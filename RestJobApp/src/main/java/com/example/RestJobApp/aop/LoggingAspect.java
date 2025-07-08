@@ -14,6 +14,7 @@ public class LoggingAspect {
     public static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 // @After is an Advice and ("execution(* com.example.RestJobApp.service.JobService.getAlljobs(..))")
 //    is Pointcut
+    //syntax for execution----->    return type, class name, method name, args
     @Before("execution(* com.example.RestJobApp.service.JobService.*(..))")
     public void logMethodCall(JoinPoint joinPoint){
         LOGGER.info("Method called : " + joinPoint.getSignature().getName());
