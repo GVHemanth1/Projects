@@ -31,9 +31,7 @@ public class ValidationAspect {
             logger.info("postId is " +postId);
 
         }
-
         Object object = proceedingJoinPoint.proceed(new Object[]{postId});
-
         return object;
 
 
